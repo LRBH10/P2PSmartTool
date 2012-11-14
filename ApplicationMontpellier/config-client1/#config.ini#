@@ -1,0 +1,8 @@
+osgi.bundles=org.eclipse.equinox.common@2:start,org.eclipse.update.configurator@3:start,org.eclipse.equinox.http.jetty@2:start,p2precLauncher@4:start, inria.lognet.virtpipes@2:start, inria.lognet.virtpipes.keyvaluestore@2:start, inria.pon.keyvaluestore@1:start, inria.pon.keyvaluestore.openchord@1:start, inria.smarttools.ds.pon@3:start, openchord@1:start
+eclipse.ignoreApp=true
+osgi.noShutdown=true
+org.eclipse.equinox.http.jetty.http.port=8080
+inria.smarttools.dht.boot=1501
+inria.smarttools.dht.host=127.0.0.1
+p2prec.firstuser=11
+p2prec.nbofusers=10

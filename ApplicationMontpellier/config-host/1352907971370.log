@@ -1,0 +1,90 @@
+!SESSION 2012-11-14 16:46:11.176 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=fr_FR
+Framework arguments:  -d32
+Command-line arguments:  -d32 -console -clean -configuration config-host
+
+!ENTRY org.eclipse.osgi 0 0 2012-11-14 16:46:11.437
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: /auto_home/rlaouadi/Downloads/eclipse-SDK-3.7.2-linux-gtk/ApplicationMontpellier/config-host/org.eclipse.osgi
+
+!ENTRY org.eclipse.equinox.http.jetty 4 0 2012-11-14 16:46:11.856
+!MESSAGE 
+!STACK 0
+org.osgi.framework.BundleException: The bundle "org.eclipse.equinox.http.jetty_2.0.0.v20100503 [3]" could not be resolved. Reason: Missing Constraint: Import-Package: javax.servlet; version="[2.5.0,2.6.0)"
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getResolverError(AbstractBundle.java:1317)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.getResolutionFailureException(AbstractBundle.java:1301)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:319)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:374)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1067)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:561)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:546)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:459)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:440)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:227)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:337)
+
+!ENTRY org.eclipse.equinox.http.jetty 4 0 2012-11-14 16:46:12.110
+!MESSAGE 
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.http.jetty.internal.Activator.start() of bundle org.eclipse.equinox.http.jetty.
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:806)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:755)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:370)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:374)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1067)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl.resumeBundles(PackageAdminImpl.java:302)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl.processDelta(PackageAdminImpl.java:546)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl.doResolveBundles(PackageAdminImpl.java:239)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl$1.run(PackageAdminImpl.java:174)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.osgi.service.cm.ConfigurationException: default : Address already in use
+	at org.eclipse.equinox.http.jetty.internal.HttpServerManager.updated(HttpServerManager.java:111)
+	at org.eclipse.equinox.http.jetty.internal.Activator.start(Activator.java:60)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:783)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:774)
+	... 9 more
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind(Native Method)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+	at sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+	at org.mortbay.jetty.nio.SelectChannelConnector.open(SelectChannelConnector.java:216)
+	at org.mortbay.jetty.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:315)
+	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:50)
+	at org.mortbay.jetty.Server.doStart(Server.java:235)
+	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:50)
+	at org.eclipse.equinox.http.jetty.internal.HttpServerManager.updated(HttpServerManager.java:109)
+	... 13 more
+Root exception:
+org.osgi.service.cm.ConfigurationException: default : Address already in use
+	at org.eclipse.equinox.http.jetty.internal.HttpServerManager.updated(HttpServerManager.java:111)
+	at org.eclipse.equinox.http.jetty.internal.Activator.start(Activator.java:60)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:783)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:774)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:755)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:370)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:374)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1067)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl.resumeBundles(PackageAdminImpl.java:302)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl.processDelta(PackageAdminImpl.java:546)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl.doResolveBundles(PackageAdminImpl.java:239)
+	at org.eclipse.osgi.framework.internal.core.PackageAdminImpl$1.run(PackageAdminImpl.java:174)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind(Native Method)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+	at sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+	at org.mortbay.jetty.nio.SelectChannelConnector.open(SelectChannelConnector.java:216)
+	at org.mortbay.jetty.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:315)
+	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:50)
+	at org.mortbay.jetty.Server.doStart(Server.java:235)
+	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:50)
+	at org.eclipse.equinox.http.jetty.internal.HttpServerManager.updated(HttpServerManager.java:109)
+	... 13 more
+
+!ENTRY org.eclipse.osgi 4 0 2012-11-14 16:46:12.447
+!MESSAGE Bundle org.eclipse.equinox.http.jetty_2.0.0.v20100503 [3] is not active.

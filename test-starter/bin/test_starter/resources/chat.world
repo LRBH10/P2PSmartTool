@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<world>
+	<connectTo id_src="ComponentsManager" type_dest="components-graph" id_dest="components-graph"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat1"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat2"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat3"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat4"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat5"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat6"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat7"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat8"/>
+	<connectTo id_src="ComponentsManager" type_dest="test" id_dest="chat9"/>
+	
+	<connectTo id_src="chat1" id_dest="chat2"/>
+	<connectTo id_src="chat2" id_dest="chat3"/>
+	<connectTo id_src="chat3" id_dest="chat4"/>
+	
+	<connectTo id_src="chat4" id_dest="chat5"/>
+	<connectTo id_src="chat5" id_dest="chat6"/>
+	<connectTo id_src="chat6" id_dest="chat7"/>
+	<connectTo id_src="chat6" id_dest="chat3"/>
+	
+	<connectTo id_src="chat7" id_dest="chat8"/>
+	<connectTo id_src="chat8" id_dest="chat9"/>
+	<connectTo id_src="chat9" id_dest="chat1"/>
+	
+	
+</world>

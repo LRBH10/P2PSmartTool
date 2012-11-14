@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<component name="test" type="component" extends="inria.communicationprotocol" ns="test">
+
+	<containerclass name="TestContainer"/>
+	<facadeclass name="TestFacade" userclassname="Test"/>
+
+	<input name="test" method="input">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</input>
+
+	<output name="test" method="output">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</output>
+
+
+
+	<input name="recherche" method="inputRecherche">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</input>
+
+	<output name="recherche" method="outputRecherche">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</output>
+
+	<input name="reponse" method="inputReponse">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</input>
+
+	<output name="reponse" method="outputReponse">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</output>
+
+
+	<input name="rechercheGossip" method="inputRechercheGossip">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</input>
+
+	<output name="rechercheGossip" method="outputRechercheGossip">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</output>
+
+	<input name="reponseGossip" method="inputReponseGossip">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</input>
+
+	<output name="reponseGossip" method="outputReponseGossip">
+		<attribute name="parameter" javatype="java.lang.String"/>
+	</output>
+
+
+
+</component>
