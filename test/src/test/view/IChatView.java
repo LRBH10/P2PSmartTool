@@ -6,4 +6,8 @@ public interface IChatView {
 	
 	public void messageArrived(String expeditor, String message);
 	
+	
+	public void messageDebug(String expeditor, String message);
+	
+	public void addConnected(String expeditor);
 }

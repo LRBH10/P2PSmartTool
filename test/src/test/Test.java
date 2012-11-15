@@ -1,22 +1,40 @@
 package test;
 
-import inria.smarttools.core.component.PropertyMap;
+import inria.communicationprotocol.command.Command;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import test.view.ChatFrame;
 import test.view.IChatView;
 import utils.Request;
 import utils.Response;
+import utils.ResponseGossip;
 
 public abstract class Test extends
 		inria.communicationprotocol.CommunicationProtocolFacade {
 
 	protected IChatView view = null;
 
+	private List<String> all = new LinkedList<String>();
+
+	LinkedList<Long> verified = new LinkedList<Long>();
+
 	public Test() {
+		trigger(2000, new Command() {
+
+			@Override
+			public void execute() {
+				outputRechercheGossip("");
+				getView().messageDebug(getIdName(), "CALCULATE NEW VOISIN");
+			}
+		}, false);// */
+
 	}
 
 	public void input(String expeditor, java.lang.String parameter) {
 		System.out.println("[" + expeditor + "] :" + parameter);
-		getView().messageArrived(expeditor, parameter + " ---Simple");
+		getView().messageArrived(expeditor, parameter);
 	}
 
 	/**
@@ -34,20 +52,17 @@ public abstract class Test extends
 
 		// TO DEBUG
 		System.out.println(getIdName() + " from :[" + expeditor + "] :"
-				+ recherche);
+				+ recherche + " " + verified);
 
 		/**
 		 * test if the node have the request and the timeout (PROFENDEUR)
 		 */
 		if (!recherche.getVerified().contains(this.getIdName())
-				&& recherche.getProfondeurMax() > 0) {
+				&& recherche.getProfondeurMax() > 0
+				&& !verified.contains(recherche.getId())) {
 
-			// AFFICHAGE DES AMIS
-			System.out.print("MES AMIS : ");
-			for (String friend : this.getNeighbours("test")) {
-				System.out.print(friend + "-");
-			}
-			System.out.println();
+			// Add ID of Request
+			verified.add(recherche.getId());
 
 			// DEMINIER LA PROFENDEUR
 			recherche.setProfondeurMax(recherche.getProfondeurMax() - 1);
@@ -55,25 +70,30 @@ public abstract class Test extends
 			// AJOUTER LE NOM AU CHEMIN
 			recherche.addVerified(this.getIdName());
 
-			// ESQUE LE NEOEUD RECHERCHER EST UN AMI
-			if (getNeighbours("test").contains(recherche.getRequete())) {
+			// ESQUE LE NEOEUD RECHERCHER
+			if (getIdName().equals(recherche.getRequete())) {
 				// SI OUI COMENCER LA REPONSE
 				System.out.println("RESPNSE BEGIN with "
 						+ recherche.getVerified());
 
-				
 				// CREATION DE LA REPONSE
 				Response re = new Response(recherche.getInitiateur(),
 						recherche.getRequete(), getIdName(),
 						recherche.getVerified());
 				re.remove(getIdName());
-				outputReponse(re.getReturned().getLast(), re.serializeJSON());
-			} else {
 
+				getView().messageDebug(
+						getIdName(),
+						"I Am HERE \n RESPONSE BEGIN with sending for '"
+								+ re.getReturned().getLast() + "'");
+				outputReponse(re.getReturned().getLast(), re.serializeJSON());
+
+			} else {
+				getView().messageDebug(getIdName(),
+						"I am serching for '" + recherche.getRequete() + "'");
 				outputRecherche(recherche.serializeJSON());
 			}
 		}
-		// getView().messageArrived(expeditor, parameter + " ---Recherche");
 
 	}
 
@@ -90,23 +110,35 @@ public abstract class Test extends
 
 		if (response.getInit().equals(getIdName())) {
 
-			System.out.println(response.getReq() + " est Mon AMI");
-			getView().messageArrived(response.getFoundedOn(),
-					response.getReq() + " est Mon AMI");
+			System.out.println(response.getReq() + " I am Here");
+			getView().messageDebug(response.getFoundedOn(),
+					response.getReq() + " I am Here");
 
 		} else {
 			response.getReturned().removeLast();
 			outputReponse(response.getReturned().getLast(),
 					response.serializeJSON());
+			getView().messageDebug(getIdName(),
+					"Response to " + response.getReturned().getLast());
 		}
 
 	}
 
 	public void inputReponseGossip(String expeditor, String parameter) {
-
+		System.out.println(parameter);
+		ResponseGossip result = ResponseGossip.getFromJSON(parameter);
+		for (String element : result.getFounded()) {
+			getView().addConnected(element);
+			all.add(element);
+		}
 	}
 
 	public void inputRechercheGossip(String expeditor, String parameter) {
+		ResponseGossip res = new ResponseGossip();
+		for (String element : all) {
+			res.addNode(element);
+		}
+		outputReponseGossip(expeditor, res.serializeJSON());
 
 	}
 
@@ -146,12 +178,13 @@ public abstract class Test extends
 		if (service.equals("test")) {
 			System.out.println(getIdName() + " can now talk to " + name);
 			getView().addNeighbour(name);
+			getView().addConnected(name);
+			all.add(name);
 		}
 	}
 
 	public void disconnectInput(String expeditor) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void shutdown(String expeditor) {

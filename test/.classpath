@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="generate/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="lib" path="/auto_home/rlaouadi/workspace1/google-gson-2.2.2/gson-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/auto_home/rlaouadi/workspace1/google-gson-2.2.2/gson-2.2.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/auto_home/rlaouadi/workspace1/google-gson-2.2.2/gson-2.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mojdeh/Documents/GitHub/P2PSmartTool/google-gson-2.2.2/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mojdeh/Documents/GitHub/P2PSmartTool/google-gson-2.2.2/gson-2.2.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mojdeh/Documents/GitHub/P2PSmartTool/google-gson-2.2.2/gson-2.2.2-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

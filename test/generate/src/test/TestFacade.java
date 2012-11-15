@@ -2,9 +2,8 @@
  **/
 package test;
 
-import inria.smarttools.core.component.PropertyMap;
-
-import java.util.Vector;
+import java.util.*;
+import inria.smarttools.core.component.*;
 
 /**
  **/
@@ -13,6 +12,16 @@ public class TestFacade extends Test implements TestFacadeInterface {
    // Fields 
    //
 
+   /**
+    * recherche
+    * null
+    **/
+   protected Vector<RechercheListener> rechercheListeners = new Vector<RechercheListener>();
+   /**
+    * reponseGossip
+    * null
+    **/
+   protected Vector<ReponseGossipListener> reponseGossipListeners = new Vector<ReponseGossipListener>();
    /**
     * send
     * 
@@ -24,15 +33,25 @@ public class TestFacade extends Test implements TestFacadeInterface {
     **/
    protected Vector<ReponseListener> reponseListeners = new Vector<ReponseListener>();
    /**
+    * test
+    * null
+    **/
+   protected Vector<TestListener> testListeners = new Vector<TestListener>();
+   /**
     * undo
     * 
     **/
    protected Vector<UndoListener> undoListeners = new Vector<UndoListener>();
    /**
-    * test
-    * null
+    * disconnect
+    * 
     **/
-   protected Vector<TestListener> testListeners = new Vector<TestListener>();
+   protected Vector<DisconnectListener> disconnectListeners = new Vector<DisconnectListener>();
+   /**
+    * logUndo
+    * 
+    **/
+   protected Vector<LogUndoListener> logUndoListeners = new Vector<LogUndoListener>();
    /**
     * initData
     * 
@@ -49,35 +68,15 @@ public class TestFacade extends Test implements TestFacadeInterface {
     **/
    protected Vector<ExitListener> exitListeners = new Vector<ExitListener>();
    /**
-    * connectTo
-    * 
-    **/
-   protected Vector<ConnectToListener> connectToListeners = new Vector<ConnectToListener>();
-   /**
     * rechercheGossip
     * null
     **/
    protected Vector<RechercheGossipListener> rechercheGossipListeners = new Vector<RechercheGossipListener>();
    /**
-    * recherche
-    * null
-    **/
-   protected Vector<RechercheListener> rechercheListeners = new Vector<RechercheListener>();
-   /**
-    * reponseGossip
-    * null
-    **/
-   protected Vector<ReponseGossipListener> reponseGossipListeners = new Vector<ReponseGossipListener>();
-   /**
-    * disconnect
+    * connectTo
     * 
     **/
-   protected Vector<DisconnectListener> disconnectListeners = new Vector<DisconnectListener>();
-   /**
-    * logUndo
-    * 
-    **/
-   protected Vector<LogUndoListener> logUndoListeners = new Vector<LogUndoListener>();
+   protected Vector<ConnectToListener> connectToListeners = new Vector<ConnectToListener>();
    /**
     **/
    private String idName;
@@ -203,6 +202,54 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
+    * recherche
+    * null
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void outputRecherche(java.lang.String parameter){
+      outputRecherche(null, parameter);
+   }
+
+   /**
+    * recherche
+    * null
+    * @param adressee component name, which will receive this message
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void outputRecherche(String adressee, java.lang.String parameter){
+      PropertyMap args = new PropertyMap();
+      args.put("parameter",parameter);
+      RechercheEvent ev =  new RechercheEvent(adressee, parameter);
+      ev.setAttributes(args);
+      for(int i = 0 ; i < rechercheListeners.size() ; i++)
+      (( RechercheListener ) rechercheListeners.elementAt(i)).outputRecherche(ev);
+   }
+
+   /**
+    * reponseGossip
+    * null
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void outputReponseGossip(java.lang.String parameter){
+      outputReponseGossip(null, parameter);
+   }
+
+   /**
+    * reponseGossip
+    * null
+    * @param adressee component name, which will receive this message
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void outputReponseGossip(String adressee, java.lang.String parameter){
+      PropertyMap args = new PropertyMap();
+      args.put("parameter",parameter);
+      ReponseGossipEvent ev =  new ReponseGossipEvent(adressee, parameter);
+      ev.setAttributes(args);
+      for(int i = 0 ; i < reponseGossipListeners.size() ; i++)
+      (( ReponseGossipListener ) reponseGossipListeners.elementAt(i)).outputReponseGossip(ev);
+   }
+
+   /**
     * send
     * 
     * @param ev a <code>Object</code> value : data
@@ -252,6 +299,30 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
+    * test
+    * null
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void output(java.lang.String parameter){
+      output(null, parameter);
+   }
+
+   /**
+    * test
+    * null
+    * @param adressee component name, which will receive this message
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void output(String adressee, java.lang.String parameter){
+      PropertyMap args = new PropertyMap();
+      args.put("parameter",parameter);
+      TestEvent ev =  new TestEvent(adressee, parameter);
+      ev.setAttributes(args);
+      for(int i = 0 ; i < testListeners.size() ; i++)
+      (( TestListener ) testListeners.elementAt(i)).output(ev);
+   }
+
+   /**
     * undo
     * 
     * @param ev a <code>Object</code> value : data
@@ -277,27 +348,51 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
-    * test
-    * null
+    * disconnect
+    * 
     * @param ev a <code>Object</code> value : data
     **/
-   public  void output(java.lang.String parameter){
-      output(null, parameter);
+   public  void disconnectOut(){
+      disconnectOut(null);
    }
 
    /**
-    * test
-    * null
+    * disconnect
+    * 
     * @param adressee component name, which will receive this message
     * @param ev a <code>Object</code> value : data
     **/
-   public  void output(String adressee, java.lang.String parameter){
+   public  void disconnectOut(String adressee){
       PropertyMap args = new PropertyMap();
-      args.put("parameter",parameter);
-      TestEvent ev =  new TestEvent(adressee, parameter);
+      DisconnectEvent ev =  new DisconnectEvent(adressee);
       ev.setAttributes(args);
-      for(int i = 0 ; i < testListeners.size() ; i++)
-      (( TestListener ) testListeners.elementAt(i)).output(ev);
+      for(int i = 0 ; i < disconnectListeners.size() ; i++)
+      (( DisconnectListener ) disconnectListeners.elementAt(i)).disconnectOut(ev);
+   }
+
+   /**
+    * logUndo
+    * 
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void logUndo(java.lang.String message, java.lang.String receiver){
+      logUndo(null, message, receiver);
+   }
+
+   /**
+    * logUndo
+    * 
+    * @param adressee component name, which will receive this message
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void logUndo(String adressee, java.lang.String message, java.lang.String receiver){
+      PropertyMap args = new PropertyMap();
+      args.put("message",message);
+      args.put("receiver",receiver);
+      LogUndoEvent ev =  new LogUndoEvent(adressee, message, receiver);
+      ev.setAttributes(args);
+      for(int i = 0 ; i < logUndoListeners.size() ; i++)
+      (( LogUndoListener ) logUndoListeners.elementAt(i)).logUndo(ev);
    }
 
    /**
@@ -372,6 +467,30 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
+    * rechercheGossip
+    * null
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void outputRechercheGossip(java.lang.String parameter){
+      outputRechercheGossip(null, parameter);
+   }
+
+   /**
+    * rechercheGossip
+    * null
+    * @param adressee component name, which will receive this message
+    * @param ev a <code>Object</code> value : data
+    **/
+   public  void outputRechercheGossip(String adressee, java.lang.String parameter){
+      PropertyMap args = new PropertyMap();
+      args.put("parameter",parameter);
+      RechercheGossipEvent ev =  new RechercheGossipEvent(adressee, parameter);
+      ev.setAttributes(args);
+      for(int i = 0 ; i < rechercheGossipListeners.size() ; i++)
+      (( RechercheGossipListener ) rechercheGossipListeners.elementAt(i)).outputRechercheGossip(ev);
+   }
+
+   /**
     * connectTo
     * 
     * @param ev a <code>Object</code> value : data
@@ -402,123 +521,35 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
-    * rechercheGossip
+    * recherche
     * null
-    * @param ev a <code>Object</code> value : data
     **/
-   public  void outputRechercheGossip(java.lang.String parameter){
-      outputRechercheGossip(null, parameter);
-   }
-
-   /**
-    * rechercheGossip
-    * null
-    * @param adressee component name, which will receive this message
-    * @param ev a <code>Object</code> value : data
-    **/
-   public  void outputRechercheGossip(String adressee, java.lang.String parameter){
-      PropertyMap args = new PropertyMap();
-      args.put("parameter",parameter);
-      RechercheGossipEvent ev =  new RechercheGossipEvent(adressee, parameter);
-      ev.setAttributes(args);
-      for(int i = 0 ; i < rechercheGossipListeners.size() ; i++)
-      (( RechercheGossipListener ) rechercheGossipListeners.elementAt(i)).outputRechercheGossip(ev);
+   public  void addRechercheListener(RechercheListener data){
+      rechercheListeners.add(data);
    }
 
    /**
     * recherche
     * null
-    * @param ev a <code>Object</code> value : data
     **/
-   public  void outputRecherche(java.lang.String parameter){
-      outputRecherche(null, parameter);
-   }
-
-   /**
-    * recherche
-    * null
-    * @param adressee component name, which will receive this message
-    * @param ev a <code>Object</code> value : data
-    **/
-   public  void outputRecherche(String adressee, java.lang.String parameter){
-      PropertyMap args = new PropertyMap();
-      args.put("parameter",parameter);
-      RechercheEvent ev =  new RechercheEvent(adressee, parameter);
-      ev.setAttributes(args);
-      for(int i = 0 ; i < rechercheListeners.size() ; i++)
-      (( RechercheListener ) rechercheListeners.elementAt(i)).outputRecherche(ev);
+   public  void removeRechercheListener(RechercheListener data){
+      rechercheListeners.remove(data);
    }
 
    /**
     * reponseGossip
     * null
-    * @param ev a <code>Object</code> value : data
     **/
-   public  void outputReponseGossip(java.lang.String parameter){
-      outputReponseGossip(null, parameter);
+   public  void addReponseGossipListener(ReponseGossipListener data){
+      reponseGossipListeners.add(data);
    }
 
    /**
     * reponseGossip
     * null
-    * @param adressee component name, which will receive this message
-    * @param ev a <code>Object</code> value : data
     **/
-   public  void outputReponseGossip(String adressee, java.lang.String parameter){
-      PropertyMap args = new PropertyMap();
-      args.put("parameter",parameter);
-      ReponseGossipEvent ev =  new ReponseGossipEvent(adressee, parameter);
-      ev.setAttributes(args);
-      for(int i = 0 ; i < reponseGossipListeners.size() ; i++)
-      (( ReponseGossipListener ) reponseGossipListeners.elementAt(i)).outputReponseGossip(ev);
-   }
-
-   /**
-    * disconnect
-    * 
-    * @param ev a <code>Object</code> value : data
-    **/
-   public  void disconnectOut(){
-      disconnectOut(null);
-   }
-
-   /**
-    * disconnect
-    * 
-    * @param adressee component name, which will receive this message
-    * @param ev a <code>Object</code> value : data
-    **/
-   public  void disconnectOut(String adressee){
-      PropertyMap args = new PropertyMap();
-      DisconnectEvent ev =  new DisconnectEvent(adressee);
-      ev.setAttributes(args);
-      for(int i = 0 ; i < disconnectListeners.size() ; i++)
-      (( DisconnectListener ) disconnectListeners.elementAt(i)).disconnectOut(ev);
-   }
-
-   /**
-    * logUndo
-    * 
-    * @param ev a <code>Object</code> value : data
-    **/
-   public  void logUndo(java.lang.String message, java.lang.String receiver){
-      logUndo(null, message, receiver);
-   }
-
-   /**
-    * logUndo
-    * 
-    * @param adressee component name, which will receive this message
-    * @param ev a <code>Object</code> value : data
-    **/
-   public  void logUndo(String adressee, java.lang.String message, java.lang.String receiver){
-      PropertyMap args = new PropertyMap();
-      args.put("message",message);
-      args.put("receiver",receiver);
-      LogUndoEvent ev =  new LogUndoEvent(adressee, message, receiver);
-      ev.setAttributes(args);
-      for(int i = 0 ; i < logUndoListeners.size() ; i++)
-      (( LogUndoListener ) logUndoListeners.elementAt(i)).logUndo(ev);
+   public  void removeReponseGossipListener(ReponseGossipListener data){
+      reponseGossipListeners.remove(data);
    }
 
    /**
@@ -554,6 +585,22 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
+    * test
+    * null
+    **/
+   public  void addTestListener(TestListener data){
+      testListeners.add(data);
+   }
+
+   /**
+    * test
+    * null
+    **/
+   public  void removeTestListener(TestListener data){
+      testListeners.remove(data);
+   }
+
+   /**
     * undo
     * 
     **/
@@ -570,19 +617,35 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
-    * test
-    * null
+    * disconnect
+    * 
     **/
-   public  void addTestListener(TestListener data){
-      testListeners.add(data);
+   public  void addDisconnectListener(DisconnectListener data){
+      disconnectListeners.add(data);
    }
 
    /**
-    * test
-    * null
+    * disconnect
+    * 
     **/
-   public  void removeTestListener(TestListener data){
-      testListeners.remove(data);
+   public  void removeDisconnectListener(DisconnectListener data){
+      disconnectListeners.remove(data);
+   }
+
+   /**
+    * logUndo
+    * 
+    **/
+   public  void addLogUndoListener(LogUndoListener data){
+      logUndoListeners.add(data);
+   }
+
+   /**
+    * logUndo
+    * 
+    **/
+   public  void removeLogUndoListener(LogUndoListener data){
+      logUndoListeners.remove(data);
    }
 
    /**
@@ -634,22 +697,6 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
-    * connectTo
-    * 
-    **/
-   public  void addConnectToListener(ConnectToListener data){
-      connectToListeners.add(data);
-   }
-
-   /**
-    * connectTo
-    * 
-    **/
-   public  void removeConnectToListener(ConnectToListener data){
-      connectToListeners.remove(data);
-   }
-
-   /**
     * rechercheGossip
     * null
     **/
@@ -666,67 +713,19 @@ public class TestFacade extends Test implements TestFacadeInterface {
    }
 
    /**
-    * recherche
-    * null
-    **/
-   public  void addRechercheListener(RechercheListener data){
-      rechercheListeners.add(data);
-   }
-
-   /**
-    * recherche
-    * null
-    **/
-   public  void removeRechercheListener(RechercheListener data){
-      rechercheListeners.remove(data);
-   }
-
-   /**
-    * reponseGossip
-    * null
-    **/
-   public  void addReponseGossipListener(ReponseGossipListener data){
-      reponseGossipListeners.add(data);
-   }
-
-   /**
-    * reponseGossip
-    * null
-    **/
-   public  void removeReponseGossipListener(ReponseGossipListener data){
-      reponseGossipListeners.remove(data);
-   }
-
-   /**
-    * disconnect
+    * connectTo
     * 
     **/
-   public  void addDisconnectListener(DisconnectListener data){
-      disconnectListeners.add(data);
+   public  void addConnectToListener(ConnectToListener data){
+      connectToListeners.add(data);
    }
 
    /**
-    * disconnect
+    * connectTo
     * 
     **/
-   public  void removeDisconnectListener(DisconnectListener data){
-      disconnectListeners.remove(data);
-   }
-
-   /**
-    * logUndo
-    * 
-    **/
-   public  void addLogUndoListener(LogUndoListener data){
-      logUndoListeners.add(data);
-   }
-
-   /**
-    * logUndo
-    * 
-    **/
-   public  void removeLogUndoListener(LogUndoListener data){
-      logUndoListeners.remove(data);
+   public  void removeConnectToListener(ConnectToListener data){
+      connectToListeners.remove(data);
    }
 
 

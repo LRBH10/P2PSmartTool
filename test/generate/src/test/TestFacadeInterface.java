@@ -74,6 +74,30 @@ public interface TestFacadeInterface {
    public  Object requestTree(String expeditor);
 
    /**
+    * recherche
+    * null
+    **/
+   public  void addRechercheListener(RechercheListener data);
+
+   /**
+    * recherche
+    * null
+    **/
+   public  void removeRechercheListener(RechercheListener data);
+
+   /**
+    * reponseGossip
+    * null
+    **/
+   public  void addReponseGossipListener(ReponseGossipListener data);
+
+   /**
+    * reponseGossip
+    * null
+    **/
+   public  void removeReponseGossipListener(ReponseGossipListener data);
+
+   /**
     * send
     * 
     **/
@@ -98,6 +122,18 @@ public interface TestFacadeInterface {
    public  void removeReponseListener(ReponseListener data);
 
    /**
+    * test
+    * null
+    **/
+   public  void addTestListener(TestListener data);
+
+   /**
+    * test
+    * null
+    **/
+   public  void removeTestListener(TestListener data);
+
+   /**
     * undo
     * 
     **/
@@ -110,16 +146,28 @@ public interface TestFacadeInterface {
    public  void removeUndoListener(UndoListener data);
 
    /**
-    * test
-    * null
+    * disconnect
+    * 
     **/
-   public  void addTestListener(TestListener data);
+   public  void addDisconnectListener(DisconnectListener data);
 
    /**
-    * test
-    * null
+    * disconnect
+    * 
     **/
-   public  void removeTestListener(TestListener data);
+   public  void removeDisconnectListener(DisconnectListener data);
+
+   /**
+    * logUndo
+    * 
+    **/
+   public  void addLogUndoListener(LogUndoListener data);
+
+   /**
+    * logUndo
+    * 
+    **/
+   public  void removeLogUndoListener(LogUndoListener data);
 
    /**
     * initData
@@ -158,18 +206,6 @@ public interface TestFacadeInterface {
    public  void removeExitListener(ExitListener data);
 
    /**
-    * connectTo
-    * 
-    **/
-   public  void addConnectToListener(ConnectToListener data);
-
-   /**
-    * connectTo
-    * 
-    **/
-   public  void removeConnectToListener(ConnectToListener data);
-
-   /**
     * rechercheGossip
     * null
     **/
@@ -182,52 +218,16 @@ public interface TestFacadeInterface {
    public  void removeRechercheGossipListener(RechercheGossipListener data);
 
    /**
-    * recherche
-    * null
-    **/
-   public  void addRechercheListener(RechercheListener data);
-
-   /**
-    * recherche
-    * null
-    **/
-   public  void removeRechercheListener(RechercheListener data);
-
-   /**
-    * reponseGossip
-    * null
-    **/
-   public  void addReponseGossipListener(ReponseGossipListener data);
-
-   /**
-    * reponseGossip
-    * null
-    **/
-   public  void removeReponseGossipListener(ReponseGossipListener data);
-
-   /**
-    * disconnect
+    * connectTo
     * 
     **/
-   public  void addDisconnectListener(DisconnectListener data);
+   public  void addConnectToListener(ConnectToListener data);
 
    /**
-    * disconnect
+    * connectTo
     * 
     **/
-   public  void removeDisconnectListener(DisconnectListener data);
-
-   /**
-    * logUndo
-    * 
-    **/
-   public  void addLogUndoListener(LogUndoListener data);
-
-   /**
-    * logUndo
-    * 
-    **/
-   public  void removeLogUndoListener(LogUndoListener data);
+   public  void removeConnectToListener(ConnectToListener data);
 
 
 }

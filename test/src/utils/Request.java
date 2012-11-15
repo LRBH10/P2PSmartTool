@@ -1,12 +1,16 @@
 package utils;
 
+import java.util.Calendar;
 import java.util.LinkedList;
+
+import sun.misc.Cache;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Request {
 
+	long id;
 	String initiateur;
 	String requete;
 	int profondeurMax;
@@ -17,6 +21,11 @@ public class Request {
 		requete = who;
 		profondeurMax = profondeur;
 		verified.add(source);
+		id = Calendar.getInstance().getTimeInMillis();
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public Request() {
@@ -72,7 +81,7 @@ public class Request {
 
 	@Override
 	public String toString() {
-		return "REQUSET : prof : " + profondeurMax + "\treq : "
-				+ requete + "\tinit : " + initiateur +"\tdeja : "+ verified;
+		return "REQUSET : id "+ id +"\tprof : " + profondeurMax + "\treq : " + requete
+				+ "\tinit : " + initiateur + "\tdeja : " + verified;
 	}
 }

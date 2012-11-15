@@ -11,7 +11,7 @@ import inria.smarttools.core.component.PropertyMap;
 
 /**
  **/
-public class TestContainer extends CommunicationProtocolContainer implements inria.smarttools.core.component.Container, test.SendListener, test.ReponseListener, test.UndoListener, test.TestListener, test.InitDataListener, test.LogListener, test.ExitListener, test.ConnectToListener, test.RechercheGossipListener, test.RechercheListener, test.ReponseGossipListener, test.DisconnectListener, test.LogUndoListener {
+public class TestContainer extends CommunicationProtocolContainer implements inria.smarttools.core.component.Container, test.RechercheListener, test.ReponseGossipListener, test.SendListener, test.ReponseListener, test.TestListener, test.UndoListener, test.DisconnectListener, test.LogUndoListener, test.InitDataListener, test.LogListener, test.ExitListener, test.RechercheGossipListener, test.ConnectToListener {
    {
       List<MethodCall> methodCalls;
       methodCalls = calls.get("recherche");
@@ -148,19 +148,35 @@ public class TestContainer extends CommunicationProtocolContainer implements inr
     **/
    protected  void initFacadeListeners(){
       super.initFacadeListeners();
+      ((TestFacadeInterface) facade).addRechercheListener(this);
+      ((TestFacadeInterface) facade).addReponseGossipListener(this);
       ((TestFacadeInterface) facade).addSendListener(this);
       ((TestFacadeInterface) facade).addReponseListener(this);
-      ((TestFacadeInterface) facade).addUndoListener(this);
       ((TestFacadeInterface) facade).addTestListener(this);
+      ((TestFacadeInterface) facade).addUndoListener(this);
+      ((TestFacadeInterface) facade).addDisconnectListener(this);
+      ((TestFacadeInterface) facade).addLogUndoListener(this);
       ((TestFacadeInterface) facade).addInitDataListener(this);
       ((TestFacadeInterface) facade).addLogListener(this);
       ((TestFacadeInterface) facade).addExitListener(this);
-      ((TestFacadeInterface) facade).addConnectToListener(this);
       ((TestFacadeInterface) facade).addRechercheGossipListener(this);
-      ((TestFacadeInterface) facade).addRechercheListener(this);
-      ((TestFacadeInterface) facade).addReponseGossipListener(this);
-      ((TestFacadeInterface) facade).addDisconnectListener(this);
-      ((TestFacadeInterface) facade).addLogUndoListener(this);
+      ((TestFacadeInterface) facade).addConnectToListener(this);
+   }
+
+   /**
+    * RechercheListener
+    * @throws IllegalStateException to absolutely care in business methods
+    **/
+   public  void outputRecherche(RechercheEvent e){
+      send(new MessageImpl("recherche", e.getAttributes() , null, e.getAdressee()));
+   }
+
+   /**
+    * ReponseGossipListener
+    * @throws IllegalStateException to absolutely care in business methods
+    **/
+   public  void outputReponseGossip(ReponseGossipEvent e){
+      send(new MessageImpl("reponseGossip", e.getAttributes() , null, e.getAdressee()));
    }
 
    /**
@@ -180,6 +196,14 @@ public class TestContainer extends CommunicationProtocolContainer implements inr
    }
 
    /**
+    * TestListener
+    * @throws IllegalStateException to absolutely care in business methods
+    **/
+   public  void output(TestEvent e){
+      send(new MessageImpl("test", e.getAttributes() , null, e.getAdressee()));
+   }
+
+   /**
     * UndoListener
     * @throws IllegalStateException to absolutely care in business methods
     **/
@@ -188,11 +212,19 @@ public class TestContainer extends CommunicationProtocolContainer implements inr
    }
 
    /**
-    * TestListener
+    * DisconnectListener
     * @throws IllegalStateException to absolutely care in business methods
     **/
-   public  void output(TestEvent e){
-      send(new MessageImpl("test", e.getAttributes() , null, e.getAdressee()));
+   public  void disconnectOut(DisconnectEvent e){
+      send(new MessageImpl("disconnect", e.getAttributes() , null, e.getAdressee()));
+   }
+
+   /**
+    * LogUndoListener
+    * @throws IllegalStateException to absolutely care in business methods
+    **/
+   public  void logUndo(LogUndoEvent e){
+      send(new MessageImpl("logUndo", e.getAttributes() , null, e.getAdressee()));
    }
 
    /**
@@ -220,14 +252,6 @@ public class TestContainer extends CommunicationProtocolContainer implements inr
    }
 
    /**
-    * ConnectToListener
-    * @throws IllegalStateException to absolutely care in business methods
-    **/
-   public  void connectTo(ConnectToEvent e){
-      send(new MessageImpl("connectTo", e.getAttributes() , null, e.getAdressee()));
-   }
-
-   /**
     * RechercheGossipListener
     * @throws IllegalStateException to absolutely care in business methods
     **/
@@ -236,35 +260,11 @@ public class TestContainer extends CommunicationProtocolContainer implements inr
    }
 
    /**
-    * RechercheListener
+    * ConnectToListener
     * @throws IllegalStateException to absolutely care in business methods
     **/
-   public  void outputRecherche(RechercheEvent e){
-      send(new MessageImpl("recherche", e.getAttributes() , null, e.getAdressee()));
-   }
-
-   /**
-    * ReponseGossipListener
-    * @throws IllegalStateException to absolutely care in business methods
-    **/
-   public  void outputReponseGossip(ReponseGossipEvent e){
-      send(new MessageImpl("reponseGossip", e.getAttributes() , null, e.getAdressee()));
-   }
-
-   /**
-    * DisconnectListener
-    * @throws IllegalStateException to absolutely care in business methods
-    **/
-   public  void disconnectOut(DisconnectEvent e){
-      send(new MessageImpl("disconnect", e.getAttributes() , null, e.getAdressee()));
-   }
-
-   /**
-    * LogUndoListener
-    * @throws IllegalStateException to absolutely care in business methods
-    **/
-   public  void logUndo(LogUndoEvent e){
-      send(new MessageImpl("logUndo", e.getAttributes() , null, e.getAdressee()));
+   public  void connectTo(ConnectToEvent e){
+      send(new MessageImpl("connectTo", e.getAttributes() , null, e.getAdressee()));
    }
 
    /**

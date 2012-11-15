@@ -1,5 +1,7 @@
 package test;
 
+import java.util.LinkedList;
+
 import com.google.gson.Gson;
 
 import utils.Request;
@@ -11,16 +13,14 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Request rr = new Request("rabah","ll",5);
+		LinkedList<String> lst= new LinkedList<String>();
+		lst.add("test1");
+		lst.add("test2");
 		
-		String r = new Gson().toJson(rr);
-		
-		Request f = new Gson().fromJson(r, Request.class);
-		
-		
-		Response rr1 = new Response("rabah","ll","sss", null);
-		String r1 = rr1.serializeJSON();
-		System.out.print(new Gson().fromJson(r1, Response.class));
+		String str=new Gson().toJson(lst);
+		LinkedList<String> lst2 = new LinkedList<String>();
+		lst2=new Gson().fromJson(str, LinkedList.class);
+		System.out.println();
 	}
 
 }
