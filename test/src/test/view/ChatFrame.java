@@ -135,6 +135,7 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 	protected void connectedMouseClicked(MouseEvent evt) {
 		if (evt.getClickCount() == 2) {
 			add(friendsConnected, connected.getSelectedValue(), friends);
+			chat.addNeighbour(connected.getSelectedValue(), "test");
 			chat.connectTo(chat.getIdName(), "test",
 					connected.getSelectedValue(), null, null, null,
 					new PropertyMap());
@@ -144,7 +145,7 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 	private void friendsMouseClicked(java.awt.event.MouseEvent evt) {
 		if (evt.getClickCount() == 2) {
 			remove(friendsConnected, friends.getSelectedValue(), friends);
-			//chat.disconnectInput(friends.getSelectedValue());
+			chat.disconnectInput(friends.getSelectedValue());
 		}
 	}
 

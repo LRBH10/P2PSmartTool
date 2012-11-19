@@ -108,6 +108,7 @@ public abstract class Test extends
 		System.out.println(getIdName() + " from [" + expeditor + "] :"
 				+ response);
 
+	
 		if (response.getInit().equals(getIdName())) {
 
 			System.out.println(response.getReq() + " I am Here");
@@ -184,7 +185,7 @@ public abstract class Test extends
 	}
 
 	public void disconnectInput(String expeditor) {
-		
+		//removeNeighbour(expeditor);
 	}
 
 	public void shutdown(String expeditor) {
