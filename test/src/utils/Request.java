@@ -3,27 +3,28 @@ package utils;
 import java.util.Calendar;
 import java.util.LinkedList;
 
-import sun.misc.Cache;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Request {
 
 	long id;
+	boolean directConnection;
 	String initiateur;
 	String requete;
 	int profondeurMax;
 	LinkedList<String> verified = new LinkedList<String>();
 
-	public Request(String source, String who, int profondeur) {
+	public Request(String source, String who, int profondeur, boolean direct) {
 		initiateur = source;
+		directConnection = direct;
 		requete = who;
 		profondeurMax = profondeur;
 		verified.add(source);
 		id = Calendar.getInstance().getTimeInMillis();
 	}
 
+	
 	public long getId() {
 		return id;
 	}
@@ -77,6 +78,14 @@ public class Request {
 		Request req = gson.fromJson(json_text, Request.class);
 
 		return req;
+	}
+	
+	public boolean isDirectConnection() {
+		return directConnection;
+	}
+	
+	public void setDirectConnection(boolean directConnection) {
+		this.directConnection = directConnection;
 	}
 
 	@Override

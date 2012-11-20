@@ -1,6 +1,7 @@
 package test;
 
 import inria.communicationprotocol.command.Command;
+import inria.smarttools.core.component.PropertyMap;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -76,18 +77,31 @@ public abstract class Test extends
 				System.out.println("RESPNSE BEGIN with "
 						+ recherche.getVerified());
 
-				// CREATION DE LA REPONSE
-				Response re = new Response(recherche.getInitiateur(),
-						recherche.getRequete(), getIdName(),
-						recherche.getVerified());
-				re.remove(getIdName());
+				// ESQUE NON DIRECT CONNECTION APRES CHERCHE
+				if (!recherche.isDirectConnection()) {
+					// CREATION DE LA REPONSE
+					Response re = new Response(recherche.getInitiateur(),
+							recherche.getRequete(), getIdName(),
+							recherche.getVerified());
+					re.remove(getIdName());
 
-				getView().messageDebug(
-						getIdName(),
-						"I Am HERE \n RESPONSE BEGIN with sending for '"
-								+ re.getReturned().getLast() + "'");
-				outputReponse(re.getReturned().getLast(), re.serializeJSON());
+					getView().messageDebug(
+							getIdName(),
+							"I Am HERE \n RESPONSE BEGIN with sending for '"
+									+ re.getReturned().getLast() + "'");
+					outputReponse(re.getReturned().getLast(),
+							re.serializeJSON());
+				}
 
+				// Direct Connection
+				else {
+					getView().addNeighbour(recherche.getInitiateur());
+					this.connectTo(getIdName(), "test",
+							recherche.getInitiateur(), null, null, null,
+							new PropertyMap());
+					getView().messageDebug(getIdName(),
+							"I a, connected to there");
+				}
 			} else {
 				getView().messageDebug(getIdName(),
 						"I am serching for '" + recherche.getRequete() + "'");
@@ -108,12 +122,18 @@ public abstract class Test extends
 		System.out.println(getIdName() + " from [" + expeditor + "] :"
 				+ response);
 
-	
 		if (response.getInit().equals(getIdName())) {
 
 			System.out.println(response.getReq() + " I am Here");
 			getView().messageDebug(response.getFoundedOn(),
 					response.getReq() + " I am Here");
+			
+			getView().addNeighbour(response.getReq());
+			this.connectTo(getIdName(), "test",
+					response.getReq(), null, null, null,
+					new PropertyMap());
+			getView().messageDebug(getIdName(),
+					"connection retablie");
 
 		} else {
 			response.getReturned().removeLast();
@@ -185,7 +205,7 @@ public abstract class Test extends
 	}
 
 	public void disconnectInput(String expeditor) {
-		//removeNeighbour(expeditor);
+		// removeNeighbour(expeditor);
 	}
 
 	public void shutdown(String expeditor) {

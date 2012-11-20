@@ -63,6 +63,7 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 		messages = new javax.swing.JTextArea();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		connected = new javax.swing.JList<String>();
+		directconnection = new javax.swing.JCheckBox();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,7 +80,10 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 			}
 		});
 		jPanel1.add(send);
-		jPanel1.add(jSeparator1);
+		
+		
+		directconnection.setText("Retablir une connection direct");
+		jPanel1.add(directconnection);
 
 		recherche.setText("Recherche");
 		recherche.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +91,7 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 				rechercheActionPerformed(evt);
 			}
 		});
+		
 		jPanel1.add(recherche);
 
 		bas.add(jPanel1);
@@ -155,7 +160,7 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 	}
 
 	private void rechercheActionPerformed(java.awt.event.ActionEvent evt) {
-		Request req = new Request(chat.getIdName(), request.getText(), 5);
+		Request req = new Request(chat.getIdName(), request.getText(), 5, directconnection.isSelected());
 		String requete = req.serializeJSON();
 		chat.outputRecherche(requete);
 		debug.append("BROADCAST <- " + request.getText() + "\n");
@@ -238,6 +243,8 @@ public class ChatFrame extends javax.swing.JFrame implements IChatView {
 	private javax.swing.JScrollPane scrol2;
 	private javax.swing.JScrollPane scroll1;
 	private javax.swing.JButton send;
+	private javax.swing.JCheckBox directconnection;
+    
 	// End of variables declaration
 
 }
