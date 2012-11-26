@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<?eclipse version="3.4"?>
-
-<plugin>
-	<extension point="smarttools.component">
-<cdml cdmlName="test" componentName="test" containerName="test.TestContainer" facadeName="test.TestFacade"/>
-</extension>
-</plugin>
