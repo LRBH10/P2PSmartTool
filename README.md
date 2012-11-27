@@ -38,7 +38,7 @@ Vue:
 Example connection apres reponse
 =================================
 
-	     B  -  C 
+	     	B  -  C 
              /     |
             A - D - F -L- I
                  \	 /
