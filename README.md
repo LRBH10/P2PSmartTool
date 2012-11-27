@@ -1,5 +1,13 @@
 P2PSmartTool
 ============
+IMPORTANT :
+--------------
+
+                * l'application elle marche sur JVM 1.7 (juste l'interface graphique : JLIST est paramétré )
+                           par contre dans JAVA 1.6  c'est une erreur (il faut faire le cast)
+                
+
+
 Explication :
 -------------
            	* Recherche un contact 
@@ -34,6 +42,8 @@ Vue:
 			- Envoi pour communication 
 				Remarque :  si aucun amis selection c'est un Broadcast
 			- Recherche un contact donnée dans le JTextField
+		
+		* Pour ajouter un contact il suffit de faire double clique sur lui.
 
 Example connection apres reponse
 =================================
