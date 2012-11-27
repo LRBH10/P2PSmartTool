@@ -48,11 +48,11 @@ Vue:
 Example connection apres reponse
 =================================
 
-	     	B  -  C 
+	     	 B  -  C 
              /     |
             A - D - F -L- I
-                 \	           /
-		      E      -    G 
+                 \	     /
+		           E - G 
 				   
 			
 		supposant que A cherche I
