@@ -52,7 +52,7 @@ Example connection apres reponse
              /     |
             A - D - F -L- I
                  \	 /
-		 	  E - G 
+		      E - G 
 				   
 			
 		supposant que A cherche I
